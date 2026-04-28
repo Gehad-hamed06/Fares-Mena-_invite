@@ -1,0 +1,110 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Congratulations Fares & Mena</title><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Cinzel&family=Dancing+Script&display=swap" rel="stylesheet"><style>
+body{
+  margin:0;
+  font-family:'Cormorant Garamond', serif;
+  background: linear-gradient(135deg,#3b0000,#8b0000);
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  text-align:center;
+  overflow:hidden;
+}
+
+.card{
+  background: rgba(0,0,0,0.3);
+  padding:40px;
+  border-radius:10px;
+  backdrop-filter: blur(10px);
+  animation: fadeIn 2s ease;
+  z-index:2;
+}
+
+h1{
+  font-family:'Cinzel', serif;
+  font-size:2.5em;
+}
+
+.amp{ color:gold; }
+
+.date{
+  margin-top:20px;
+  font-size:1.2em;
+  color:#ffd700;
+}
+
+.music-btn{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#fff;
+  color:#8b0000;
+  border:none;
+  border-radius:50%;
+  width:50px;
+  height:50px;
+  font-size:20px;
+  cursor:pointer;
+  z-index:3;
+}
+
+.heart{
+  position:absolute;
+  animation: float 6s linear infinite;
+  opacity:0.6;
+}
+
+@keyframes float{
+  from{ transform:translateY(100vh);}
+  to{ transform:translateY(-10vh);}
+}
+
+@keyframes fadeIn{
+  from{opacity:0;}
+  to{opacity:1;}
+}
+</style></head><body><div class="card">
+  <h1>wedding party<br>Fares <span class="amp">&</span> Mena</h1>  <p>With hearts overflowing with joy and happiness, we invite you to share our happiest moments with us, for our joy is incomplete without you.</p>
+  <p>بمشاعر يغمرها الفرح والسرور، ندعوكم لتشاركونا أسعد لحظاتنا، ففرحتنا لا تكتمل إلا بوجودكم</p>
+  <div class="date">
+    30 / 05 / 2026 <br>
+    Royal Festival Hall
+  </div>
+</div><button class="music-btn" id="musicBtn">♪</button>
+
+<!-- Audio file added in the same HTML file --><audio id="music" autoplay loop>
+  <source src="Albumaty.Com_mhmwd_alasyly_wakhyra__-_mslsl_atnyn_ghyrna_-_ma_sabryn.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio><script>
+const music = document.getElementById("music");
+const btn = document.getElementById("musicBtn");
+
+btn.onclick = function(){
+  if(music.paused){
+    music.play();
+    btn.innerHTML = "♫";
+  } else {
+    music.pause();
+    btn.innerHTML = "♪";
+  }
+}
+
+function createHeart(){
+  const h = document.createElement("div");
+  h.classList.add("heart");
+  h.innerHTML = "🤵‍♂️❤️👰";
+  h.style.left = Math.random()*100 + "vw";
+  h.style.fontSize = (Math.random()*20+10) + "px";
+  document.body.appendChild(h);
+  setTimeout(() => h.remove(), 6000);
+}
+
+setInterval(createHeart, 300);
+  </script>
+</body>
+</html>
