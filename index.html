@@ -1,8 +1,13 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Congratulations Fares & Mena</title><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Cinzel&family=Dancing+Script&display=swap" rel="stylesheet"><style>
+<title>Congratulations Fares & Mena</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Cinzel&family=Dancing+Script&display=swap" rel="stylesheet">
+
+<style>
 body{
   margin:0;
   font-family:'Cormorant Garamond', serif;
@@ -23,6 +28,17 @@ body{
   backdrop-filter: blur(10px);
   animation: fadeIn 2s ease;
   z-index:2;
+  max-width:400px;
+}
+
+/* صورة العريس والعروسة */
+.couple-img{
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid gold;
+  margin-bottom:20px;
 }
 
 h1{
@@ -68,19 +84,36 @@ h1{
   from{opacity:0;}
   to{opacity:1;}
 }
-</style></head><body><div class="card">
-  <h1>wedding party<br>Fares <span class="amp">&</span> Mena</h1>  <p>With hearts overflowing with joy and happiness, we invite you to share our happiest moments with us, for our joy is incomplete without you.</p>
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+  <!-- حط الصورة هنا -->
+  <img src="IMG-20260430-WA0009.jpg" class="couple-img">
+
+  <h1>wedding party<br>Fares <span class="amp">&</span> Mena</h1>
+
+  <p>With hearts overflowing with joy and happiness, we invite you to share our happiest moments with us, for our joy is incomplete without you.</p>
+
   <p>بمشاعر يغمرها الفرح والسرور، ندعوكم لتشاركونا أسعد لحظاتنا، ففرحتنا لا تكتمل إلا بوجودكم</p>
+
   <div class="date">
     30 / 05 / 2026 <br>
-    Royal Festival Hall
+    قاعه رويال فيستيفال
   </div>
-</div><button class="music-btn" id="musicBtn">♪</button>
 
-<!-- Audio file added in the same HTML file --><audio id="music" autoplay loop>
+</div>
+
+<button class="music-btn" id="musicBtn">♪</button>
+
+<audio id="music" autoplay loop>
   <source src="Albumaty.Com_mhmwd_alasyly_wakhyra__-_mslsl_atnyn_ghyrna_-_ma_sabryn.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio><script>
+</audio>
+
+<script>
 const music = document.getElementById("music");
 const btn = document.getElementById("musicBtn");
 
@@ -105,6 +138,7 @@ function createHeart(){
 }
 
 setInterval(createHeart, 300);
-  </script>
+</script>
+
 </body>
 </html>
