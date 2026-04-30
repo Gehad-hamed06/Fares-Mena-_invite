@@ -1,144 +1,727 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Congratulations Fares & Mena</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Cinzel&family=Dancing+Script&display=swap" rel="stylesheet">
-
+<title>دعوة زفاف Fares & Mena</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
 <style>
-body{
-  margin:0;
-  font-family:'Cormorant Garamond', serif;
-  background: linear-gradient(135deg,#3b0000,#8b0000);
-  color:white;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
-  text-align:center;
-  overflow:hidden;
-}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --beige: #f5ede0;
+    --beige-dark: #e8d5b7;
+    --beige-light: #fdf6ec;
+    --gold: #c9a96e;
+    --gold-light: #e8c98a;
+    --gold-dark: #a07840;
+    --green: #4a7c59;
+    --green-light: #6aaa7a;
+    --green-dark: #2d5e3a;
+    --brown: #7a5230;
+    --text-dark: #3a2a1a;
+  }
+  body {
+    font-family: 'Amiri', serif;
+    background: var(--beige);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 
-.card{
-  background: rgba(0,0,0,0.3);
-  padding:40px;
-  border-radius:10px;
-  backdrop-filter: blur(10px);
-  animation: fadeIn 2s ease;
-  z-index:2;
-  max-width:400px;
-}
+  /* ─── DOOR SCENE ─── */
+  #door-scene {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 30%, #c8e8b0 0%, #7ab87a 35%, #3d7a4a 65%, #1a4a28 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    overflow: hidden;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  #door-scene.fade-out {
+    opacity: 0;
+    transform: scale(1.05);
+    pointer-events: none;
+  }
+  .ray {
+    position: absolute;
+    top: -10%;
+    width: 2px;
+    background: linear-gradient(to bottom, rgba(255,255,200,0.8), transparent);
+    animation: rayFall linear infinite;
+    border-radius: 2px;
+  }
+  @keyframes rayFall {
+    0% { transform: translateY(0) rotate(15deg); opacity: 0.8; }
+    100% { transform: translateY(120vh) rotate(15deg); opacity: 0; }
+  }
+  .plant-left, .plant-right {
+    position: absolute;
+    bottom: 0;
+    width: 220px;
+    pointer-events: none;
+  }
+  .plant-left { left: -20px; }
+  .plant-right { right: -20px; transform: scaleX(-1); }
+  .arch-frame {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    filter: drop-shadow(0 30px 60px rgba(0,0,0,0.5));
+  }
+  .arch-top {
+    width: 340px;
+    height: 180px;
+    background: linear-gradient(135deg, #d4a85a, #f0d080, #c8902a, #e8c060);
+    border-radius: 170px 170px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+    box-shadow: inset 0 -10px 30px rgba(0,0,0,0.2), 0 -5px 20px rgba(200,160,60,0.5);
+    border: 3px solid var(--gold-dark);
+  }
+  .arch-top::before {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border-radius: 160px 160px 0 0;
+    border: 2px solid rgba(255,220,100,0.5);
+  }
+  .arch-ornament {
+    font-size: 2rem;
+    color: var(--gold-dark);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    letter-spacing: 4px;
+  }
+  .door-container {
+    width: 300px;
+    perspective: 1000px;
+    position: relative;
+    z-index: 3;
+    margin-top: -4px;
+    cursor: pointer;
+  }
+  .door-wrapper {
+    position: relative;
+    height: 420px;
+    transform-style: preserve-3d;
+  }
+  .door-frame {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, #8B5E2A, #C4884A, #D4A060, #C4884A, #8B5E2A);
+    border: 4px solid #6B4A1A;
+    box-shadow: -8px 0 20px rgba(0,0,0,0.4), 8px 0 20px rgba(0,0,0,0.4);
+    border-radius: 0 0 4px 4px;
+  }
+  .door-left {
+    position: absolute;
+    left: 4px; top: 4px; bottom: 4px;
+    width: calc(50% - 6px);
+    background: linear-gradient(135deg, #e8c87a 0%, #d4a850 20%, #f0d890 40%, #c89040 60%, #e0b860 80%, #b87830 100%);
+    transform-origin: left center;
+    transform-style: preserve-3d;
+    transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border-right: 2px solid rgba(0,0,0,0.2);
+    border-radius: 2px 0 0 2px;
+    box-shadow: inset -6px 0 15px rgba(0,0,0,0.25), inset 3px 0 8px rgba(255,220,100,0.3);
+  }
+  .door-right {
+    position: absolute;
+    right: 4px; top: 4px; bottom: 4px;
+    width: calc(50% - 6px);
+    background: linear-gradient(135deg, #b87830 0%, #e0b860 20%, #c89040 40%, #f0d890 60%, #d4a850 80%, #e8c87a 100%);
+    transform-origin: right center;
+    transform-style: preserve-3d;
+    transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border-left: 2px solid rgba(0,0,0,0.2);
+    border-radius: 0 2px 2px 0;
+    box-shadow: inset 6px 0 15px rgba(0,0,0,0.25), inset -3px 0 8px rgba(255,220,100,0.3);
+  }
+  .door-left:hover { transform: rotateY(-15deg); }
+  .door-right:hover { transform: rotateY(15deg); }
+  .door-left.open { transform: rotateY(-110deg); }
+  .door-right.open { transform: rotateY(110deg); }
+  .door-panel {
+    position: absolute;
+    border: 2px solid rgba(180,120,30,0.6);
+    border-radius: 4px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+    background: rgba(255,255,255,0.05);
+  }
+  .door-left .door-panel:nth-child(1) { top: 12%; left: 10%; right: 10%; height: 28%; }
+  .door-left .door-panel:nth-child(2) { top: 45%; left: 10%; right: 10%; height: 40%; }
+  .door-right .door-panel:nth-child(1) { top: 12%; left: 10%; right: 10%; height: 28%; }
+  .door-right .door-panel:nth-child(2) { top: 45%; left: 10%; right: 10%; height: 40%; }
+  .door-knob-left, .door-knob-right {
+    position: absolute;
+    top: 50%;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #fff8d0, #c8a030, #8a6010);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.4), inset 0 1px 3px rgba(255,255,200,0.5);
+    transform: translateY(-50%);
+  }
+  .door-knob-left { right: 8px; }
+  .door-knob-right { left: 8px; }
+  .door-flower {
+    position: absolute;
+    font-size: 1.2rem;
+    opacity: 0.6;
+    top: 28%; left: 50%;
+    transform: translateX(-50%);
+  }
+  .door-light {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(255,240,180,0.95) 0%, rgba(255,220,120,0.7) 40%, rgba(255,180,60,0.3) 70%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.8s ease 0.3s;
+    border-radius: 2px;
+  }
+  .door-container.opening .door-light { opacity: 1; }
+  .click-hint {
+    margin-top: 20px;
+    color: rgba(255,255,200,0.9);
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.6rem;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+  }
+  .firefly {
+    position: absolute;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,150,0.9);
+    box-shadow: 0 0 10px 4px rgba(255,255,100,0.5);
+    animation: fly linear infinite;
+  }
+  @keyframes fly {
+    0% { transform: translate(0,0) scale(1); opacity: 0; }
+    10% { opacity: 1; }
+    50% { transform: translate(var(--fx), var(--fy)) scale(0.5); opacity: 0.8; }
+    90% { opacity: 1; }
+    100% { transform: translate(var(--fx2), var(--fy2)) scale(1); opacity: 0; }
+  }
 
-/* صورة العريس والعروسة */
-.couple-img{
-  width:150px;
-  height:150px;
-  border-radius:50%;
-  object-fit:cover;
-  border:3px solid gold;
-  margin-bottom:20px;
-}
-
-h1{
-  font-family:'Cinzel', serif;
-  font-size:2.5em;
-}
-
-.amp{ color:gold; }
-
-.date{
-  margin-top:20px;
-  font-size:1.2em;
-  color:#ffd700;
-}
-
-.music-btn{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#fff;
-  color:#8b0000;
-  border:none;
-  border-radius:50%;
-  width:50px;
-  height:50px;
-  font-size:20px;
-  cursor:pointer;
-  z-index:3;
-}
-
-.heart{
-  position:absolute;
-  animation: float 6s linear infinite;
-  opacity:0.6;
-}
-
-@keyframes float{
-  from{ transform:translateY(100vh);}
-  to{ transform:translateY(-10vh);}
-}
-
-@keyframes fadeIn{
-  from{opacity:0;}
-  to{opacity:1;}
-}
+  /* ─── INVITATION ─── */
+  #invitation {
+    display: none;
+    min-height: 100vh;
+    background: linear-gradient(160deg, #fdf6ec 0%, #f5ede0 40%, #efe0c8 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  #invitation.visible { display: block; }
+  #invitation::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(201,169,110,0.08) 0%, transparent 40%),
+      radial-gradient(circle at 80% 80%, rgba(74,124,89,0.06) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .invite-inner {
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+    position: relative;
+    z-index: 1;
+  }
+  .top-ornament {
+    text-align: center;
+    margin-bottom: 10px;
+    color: var(--gold);
+    font-size: 1.8rem;
+    letter-spacing: 8px;
+    opacity: 0.7;
+  }
+  .main-title {
+    text-align: center;
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(3rem, 8vw, 5rem);
+    color: var(--gold-dark);
+    text-shadow: 0 2px 20px rgba(160,120,64,0.3);
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .title-divider {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 16px 0 28px;
+  }
+  .title-divider::before, .title-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+  .title-divider span { color: var(--gold); font-size: 1.2rem; }
+  .invite-card {
+    background: linear-gradient(145deg, rgba(255,252,245,0.95), rgba(245,237,224,0.9));
+    border: 1px solid rgba(201,169,110,0.4);
+    border-radius: 20px;
+    padding: 40px 36px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.08), 0 4px 20px rgba(201,169,110,0.15), inset 0 1px 0 rgba(255,255,255,0.8);
+    position: relative;
+    overflow: hidden;
+  }
+  .invite-card::before {
+    content: '';
+    position: absolute;
+    top: -2px; left: -2px; right: -2px; bottom: -2px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, var(--gold-light), transparent, var(--gold-light), transparent);
+    z-index: -1;
+    opacity: 0.3;
+  }
+  .corner {
+    position: absolute;
+    font-size: 1.8rem;
+    opacity: 0.35;
+    line-height: 1;
+  }
+  .corner-tl { top: 12px; left: 12px; transform: rotate(-30deg); }
+  .corner-tr { top: 12px; right: 12px; transform: rotate(30deg); }
+  .corner-bl { bottom: 12px; left: 12px; transform: rotate(210deg); }
+  .corner-br { bottom: 12px; right: 12px; transform: rotate(150deg); }
+  .photo-section {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0 28px;
+  }
+  .photo-frame {
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    border: 4px solid var(--gold);
+    box-shadow: 0 0 0 8px rgba(201,169,110,0.15), 0 0 0 12px var(--gold), 0 0 30px rgba(201,169,110,0.4);
+    overflow: hidden;
+    position: relative;
+  }
+  .photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .names-section {
+    text-align: center;
+    margin: 24px 0 28px;
+  }
+  .groom-name, .bride-name {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(2.2rem, 5vw, 3rem);
+    color: var(--gold-dark);
+    line-height: 1.2;
+    text-shadow: 0 2px 12px rgba(160,120,64,0.2);
+  }
+  .names-connector {
+    font-family: 'Amiri', serif;
+    font-size: 1.4rem;
+    color: var(--green);
+    margin: 4px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .names-connector::before, .names-connector::after { content: '✦'; color: var(--gold); font-size: 0.8rem; }
+  .inv-text-section {
+    text-align: center;
+    margin: 20px 0 28px;
+    padding: 0 10px;
+  }
+  .inv-arabic {
+    font-family: 'Amiri', serif;
+    font-size: clamp(1.1rem, 3vw, 1.4rem);
+    color: var(--text-dark);
+    line-height: 2;
+    margin-bottom: 16px;
+    direction: rtl;
+  }
+  .inv-english {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: var(--brown);
+    line-height: 1.8;
+    direction: ltr;
+    font-style: italic;
+  }
+  .info-boxes {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 28px;
+  }
+  .info-box {
+    background: linear-gradient(135deg, rgba(201,169,110,0.1), rgba(245,237,224,0.8));
+    border: 1.5px solid rgba(201,169,110,0.35);
+    border-radius: 50px;
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 4px 15px rgba(201,169,110,0.1), inset 0 1px 0 rgba(255,255,255,0.7);
+  }
+  .info-icon {
+    width: 48px; height: 48px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(160,120,64,0.3);
+  }
+  .info-content { flex: 1; text-align: right; }
+  .info-label {
+    font-family: 'Amiri', serif;
+    font-size: 0.8rem;
+    color: var(--gold-dark);
+    letter-spacing: 2px;
+    margin-bottom: 2px;
+    direction: rtl;
+  }
+  .info-value {
+    font-family: 'Amiri', serif;
+    font-size: 1.15rem;
+    color: var(--text-dark);
+    font-weight: 700;
+    direction: rtl;
+  }
+  .info-value-en {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    color: var(--brown);
+    direction: ltr;
+    display: block;
+    margin-top: 2px;
+  }
+  .music-section {
+    margin-top: 32px;
+    padding: 24px;
+    background: linear-gradient(135deg, rgba(74,124,89,0.08), rgba(201,169,110,0.08));
+    border: 1.5px solid rgba(74,124,89,0.2);
+    border-radius: 16px;
+    text-align: center;
+  }
+  .music-title {
+    font-family: 'Amiri', serif;
+    font-size: 1rem;
+    color: var(--green-dark);
+    margin-bottom: 12px;
+    direction: rtl;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .music-title::before, .music-title::after { content: '🎵'; }
+  audio {
+    width: 100%;
+    border-radius: 30px;
+    margin-top: 4px;
+  }
+  .now-playing {
+    margin-top: 8px;
+    font-family: 'Amiri', serif;
+    color: var(--gold-dark);
+    font-size: 0.95rem;
+    direction: rtl;
+  }
+  .bottom-ornament {
+    text-align: center;
+    margin-top: 36px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(201,169,110,0.3);
+    color: var(--gold);
+    font-size: 1.5rem;
+    letter-spacing: 12px;
+    opacity: 0.5;
+  }
+  @keyframes floatUp {
+    0% { transform: translateY(40px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  .animate-in { animation: floatUp 0.8s ease forwards; }
+  .delay-1 { animation-delay: 0.1s; opacity: 0; }
+  .delay-2 { animation-delay: 0.3s; opacity: 0; }
+  .delay-3 { animation-delay: 0.5s; opacity: 0; }
+  .delay-4 { animation-delay: 0.7s; opacity: 0; }
+  .delay-5 { animation-delay: 0.9s; opacity: 0; }
+  .inv-flowers {
+    position: fixed; inset: 0;
+    pointer-events: none; overflow: hidden; z-index: 0;
+  }
+  .inv-flower {
+    position: absolute;
+    opacity: 0.07;
+    font-size: 3rem;
+    animation: floatFlower linear infinite;
+  }
+  @keyframes floatFlower {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.07; }
+    90% { opacity: 0.07; }
+    100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+  }
+  @media (max-width: 480px) {
+    .invite-card { padding: 28px 20px; }
+    .info-box { padding: 14px 18px; }
+    .door-container { width: 260px; }
+    .arch-top { width: 300px; }
+  }
 </style>
 </head>
-
 <body>
 
-<div class="card">
+<!-- ═══════════ DOOR SCENE ═══════════ -->
+<div id="door-scene">
+  <div id="rays"></div>
+  <div id="fireflies"></div>
 
-  <!-- حط الصورة هنا -->
-  <img src="IMG-20260430-WA0009.jpg" class="couple-img">
+  <svg class="plant-left" viewBox="0 0 200 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M100 500 Q80 400 70 350 Q90 300 80 250 Q60 200 70 150 Q85 100 80 50" stroke="#2d5e3a" stroke-width="5" fill="none"/>
+    <ellipse cx="50" cy="200" rx="45" ry="25" fill="#4a7c59" transform="rotate(-30 50 200)"/>
+    <ellipse cx="90" cy="250" rx="50" ry="22" fill="#6aaa7a" transform="rotate(20 90 250)"/>
+    <ellipse cx="60" cy="150" rx="40" ry="20" fill="#3d6e4a" transform="rotate(-45 60 150)"/>
+    <ellipse cx="95" cy="180" rx="35" ry="18" fill="#5a9060" transform="rotate(15 95 180)"/>
+    <ellipse cx="45" cy="300" rx="55" ry="24" fill="#4a7c59" transform="rotate(-20 45 300)"/>
+    <ellipse cx="85" cy="320" rx="42" ry="20" fill="#6aaa7a" transform="rotate(35 85 320)"/>
+    <circle cx="75" cy="100" r="12" fill="#ff9eb5"/>
+    <circle cx="55" cy="130" r="10" fill="#ffb8c8"/>
+    <circle cx="90" cy="80" r="8" fill="#ff9eb5"/>
+    <circle cx="65" cy="350" r="14" fill="#ffcce0"/>
+    <circle cx="40" cy="380" r="10" fill="#ff9eb5"/>
+  </svg>
 
-  <h1>wedding party<br>Fares <span class="amp">&</span> Mena</h1>
+  <svg class="plant-right" viewBox="0 0 200 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M100 500 Q80 400 70 350 Q90 300 80 250 Q60 200 70 150 Q85 100 80 50" stroke="#2d5e3a" stroke-width="5" fill="none"/>
+    <ellipse cx="50" cy="200" rx="45" ry="25" fill="#4a7c59" transform="rotate(-30 50 200)"/>
+    <ellipse cx="90" cy="250" rx="50" ry="22" fill="#6aaa7a" transform="rotate(20 90 250)"/>
+    <ellipse cx="60" cy="150" rx="40" ry="20" fill="#3d6e4a" transform="rotate(-45 60 150)"/>
+    <ellipse cx="95" cy="180" rx="35" ry="18" fill="#5a9060" transform="rotate(15 95 180)"/>
+    <ellipse cx="45" cy="300" rx="55" ry="24" fill="#4a7c59" transform="rotate(-20 45 300)"/>
+    <ellipse cx="85" cy="320" rx="42" ry="20" fill="#6aaa7a" transform="rotate(35 85 320)"/>
+    <circle cx="75" cy="100" r="12" fill="#ff9eb5"/>
+    <circle cx="55" cy="130" r="10" fill="#ffb8c8"/>
+    <circle cx="90" cy="80" r="8" fill="#ff9eb5"/>
+    <circle cx="65" cy="350" r="14" fill="#ffcce0"/>
+    <circle cx="40" cy="380" r="10" fill="#ff9eb5"/>
+  </svg>
 
-  <p>With hearts overflowing with joy and happiness, we invite you to share our happiest moments with us, for our joy is incomplete without you.</p>
-
-  <p>بمشاعر يغمرها الفرح والسرور، ندعوكم لتشاركونا أسعد لحظاتنا، ففرحتنا لا تكتمل إلا بوجودكم</p>
-
-  <div class="date">
-    30 / 05 / 2026 <br>
-    قاعه رويال فيستيفال
+  <div class="arch-frame">
+    <div class="arch-top">
+      <span class="arch-ornament">✦ ❦ ✦</span>
+    </div>
+    <div class="door-container" id="doorContainer" onclick="openDoor()">
+      <div class="door-wrapper">
+        <div class="door-frame"></div>
+        <div class="door-light"></div>
+        <div class="door-left" id="doorLeft">
+          <div class="door-panel"></div>
+          <div class="door-panel"></div>
+          <div class="door-knob-left"></div>
+          <div class="door-flower">🌸</div>
+        </div>
+        <div class="door-right" id="doorRight">
+          <div class="door-panel"></div>
+          <div class="door-panel"></div>
+          <div class="door-knob-right"></div>
+          <div class="door-flower">🌸</div>
+        </div>
+      </div>
+    </div>
   </div>
-
+  <div class="click-hint">✨ اضغط على الباب لتفتح الدعوة ✨</div>
 </div>
 
-<button class="music-btn" id="musicBtn">♪</button>
+<!-- ═══════════ INVITATION ═══════════ -->
+<div id="invitation">
+  <div class="inv-flowers" id="invFlowers"></div>
 
-<audio id="music" autoplay loop>
+  <!-- Hidden audio - plays on door open -->
+  <audio id="audioPlayer" loop>
+    
+  </audio>
+
+  <div class="invite-inner">
+    <div class="top-ornament animate-in delay-1">✦ ✦ ✦</div>
+    <h1 class="main-title animate-in delay-1">Wedding Celebration</h1>
+    <div class="title-divider animate-in delay-2"><span>🌿 🌸 🌿</span></div>
+
+    <div class="invite-card animate-in delay-2">
+      <div class="corner corner-tl">🌸</div>
+      <div class="corner corner-tr">🌸</div>
+      <div class="corner corner-bl">🌿</div>
+      <div class="corner corner-br">🌿</div>
+
+      <!-- Photo -->
+     <div class="photo-section animate-in delay-2">
+  <div class="photo-frame">
+    <img src="IMG-20260430-WA0009.jpg" alt="Fares & Mena">
+  </div>
+</div>
+
+      <!-- Names -->
+      <div class="names-section animate-in delay-3">
+        <div class="groom-name">Fares</div>
+        <div class="names-connector">&amp;</div>
+        <div class="bride-name">Mena</div>
+      </div>
+
+      <!-- Invitation text -->
+      <div class="inv-text-section animate-in delay-3">
+        <div class="inv-arabic">
+          يسعدنا أن ندعوكم لحضور حفل زفافنا<br>
+          ونتشرف بمشاركتنا فرحة هذا اليوم المبارك<br>
+          ويسعدنا تشريفكم في هذه المناسبة السعيدة
+        </div>
+        <div class="inv-english">
+          We joyfully invite you to celebrate<br>
+          the beginning of our love story<br>
+          and share in our happiness on this blessed day
+        </div>
+      </div>
+
+      <!-- Info boxes -->
+      <div class="info-boxes animate-in delay-4">
+        <div class="info-box">
+          <div class="info-icon">📅</div>
+          <div class="info-content">
+            <div class="info-label">التاريخ • Date</div>
+            <div class="info-value">السبت، ٣٠ مايو ٢٠٢٦</div>
+            <span class="info-value-en">Saturday, May 30, 2026</span>
+          </div>
+        </div>
+        <div class="info-box">
+          <div class="info-icon">🏛️</div>
+          <div class="info-content">
+            <div class="info-label">المكان • Venue</div>
+            <div class="info-value">قاعة رويال فيستيفال</div>
+            <span class="info-value-en">Royal Festival Hall</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Music - hidden, plays on door open -->
+     <audio id="audioPlayer" loop>
   <source src="Albumaty.Com_mhmwd_alasyly_wakhyra__-_mslsl_atnyn_ghyrna_-_ma_sabryn.mp3" type="audio/mpeg">
 </audio>
 
-<script>
-const music = document.getElementById("music");
-const btn = document.getElementById("musicBtn");
+            <div class="bottom-ornament">✦ ✦ ✦</div>
+    </div>
+  </div>
+</div>
 
-btn.onclick = function(){
-  if(music.paused){
-    music.play();
-    btn.innerHTML = "♫";
-  } else {
-    music.pause();
-    btn.innerHTML = "♪";
+<script>
+// ─── Rays ───
+const raysContainer = document.getElementById('rays');
+for (let i = 0; i < 18; i++) {
+  const ray = document.createElement('div');
+  ray.className = 'ray';
+  ray.style.cssText = `left:${Math.random()*100}%;width:${1+Math.random()*3}px;height:${100+Math.random()*200}px;animation-duration:${3+Math.random()*5}s;animation-delay:${Math.random()*4}s;opacity:${0.3+Math.random()*0.5}`;
+  raysContainer.appendChild(ray);
+}
+
+// ─── Fireflies ───
+const firefliesContainer = document.getElementById('fireflies');
+for (let i = 0; i < 20; i++) {
+  const ff = document.createElement('div');
+  ff.className = 'firefly';
+  const fx = (Math.random()-0.5)*200, fy = (Math.random()-0.5)*200;
+  const fx2 = (Math.random()-0.5)*300, fy2 = (Math.random()-0.5)*300;
+  ff.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;--fx:${fx}px;--fy:${fy}px;--fx2:${fx2}px;--fy2:${fy2}px;animation-duration:${4+Math.random()*8}s;animation-delay:${Math.random()*6}s;width:${4+Math.random()*5}px;height:${4+Math.random()*5}px`;
+  firefliesContainer.appendChild(ff);
+}
+
+// ─── Open Door ───
+let doorOpened = false;
+function openDoor() {
+  if (doorOpened) return;
+  doorOpened = true;
+  const doorLeft = document.getElementById('doorLeft');
+  const doorRight = document.getElementById('doorRight');
+  const doorContainer = document.getElementById('doorContainer');
+  const doorScene = document.getElementById('door-scene');
+  const invitation = document.getElementById('invitation');
+
+  doorContainer.classList.add('opening');
+  doorLeft.classList.add('open');
+  doorRight.classList.add('open');
+
+  // Play music immediately
+  const audio = document.getElementById('audioPlayer');
+  if (audio) { audio.currentTime = 0; audio.play().catch(()=>{}); }
+
+  setTimeout(() => { doorScene.classList.add('fade-out'); }, 900);
+  setTimeout(() => {
+    doorScene.style.display = 'none';
+    invitation.classList.add('visible');
+    startInvFlowers();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Sync visible player
+    const av = document.getElementById('audioPlayerVisible');
+    if (av) { av.currentTime = audio.currentTime; }
+  }, 1700);
+}
+
+// ─── Floating flowers ───
+function startInvFlowers() {
+  const container = document.getElementById('invFlowers');
+  const flowers = ['🌸','🌺','🌹','🌼','✿','❀','🌷'];
+  for (let i = 0; i < 12; i++) {
+    const fl = document.createElement('div');
+    fl.className = 'inv-flower';
+    fl.textContent = flowers[Math.floor(Math.random()*flowers.length)];
+    fl.style.cssText = `left:${Math.random()*100}%;animation-duration:${15+Math.random()*20}s;animation-delay:${Math.random()*10}s;font-size:${2+Math.random()*3}rem`;
+    container.appendChild(fl);
   }
 }
 
-function createHeart(){
-  const h = document.createElement("div");
-  h.classList.add("heart");
-  h.innerHTML = "🤵‍♂️❤️👰";
-  h.style.left = Math.random()*100 + "vw";
-  h.style.fontSize = (Math.random()*20+10) + "px";
-  document.body.appendChild(h);
-  setTimeout(() => h.remove(), 6000);
+function toggleMusic() {
+  const av = document.getElementById('audioPlayerVisible');
+  const btn = document.getElementById('musicBtn');
+  if (av.paused) {
+    av.play();
+    btn.textContent = '⏸️';
+  } else {
+    av.pause();
+    btn.textContent = '▶️';
+  }
 }
 
-setInterval(createHeart, 300);
+document.addEventListener('keydown', e => { if (e.key==='Enter' && !doorOpened) openDoor(); });
+const doorEl = document.getElementById('doorContainer');
+doorEl.addEventListener('touchstart', () => {
+  document.getElementById('doorLeft').style.transform = 'rotateY(-15deg)';
+  document.getElementById('doorRight').style.transform = 'rotateY(15deg)';
+}, {passive:true});
+doorEl.addEventListener('touchend', () => { openDoor(); }, {passive:true});
 </script>
-
+  <script>
+const audio = document.getElementById('audioPlayer');
+audio.load();
+audio.play().catch(err => console.log(err));
+</script>
+<script>
+const audio = document.getElementById('audioPlayer');
+audio.load();
+audio.play().catch(err => console.log(err));
+</script>
+<script>
+const audio = document.getElementById('audioPlayer');
+audio.load();
+audio.play().catch(err => console.log(err));
+</script>
 </body>
 </html>
