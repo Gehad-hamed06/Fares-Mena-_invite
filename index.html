@@ -550,9 +550,7 @@
   <div class="inv-flowers" id="invFlowers"></div>
 
   <!-- Hidden audio - plays on door open -->
-  <audio id="audioPlayer" loop>
-    
-  </audio>
+ 
 
   <div class="invite-inner">
     <div class="top-ornament animate-in delay-1">✦ ✦ ✦</div>
@@ -614,14 +612,11 @@
       </div>
 
       <!-- Music - hidden, plays on door open -->
-     <audio id="audioPlayer" loop>
-  <source src="Albumaty.Com_mhmwd_alasyly_wakhyra__-_mslsl_atnyn_ghyrna_-_ma_sabryn.mp3" type="audio/mpeg">
+     
+  
+  <audio id="audioPlayer" loop>
+  <source src="algsmy_edkhly_amry_1.mp3" type="audio/mpeg">
 </audio>
-
-            <div class="bottom-ornament">✦ ✦ ✦</div>
-    </div>
-  </div>
-</div>
 
 <script>
 // ─── Rays ───
@@ -649,6 +644,7 @@ let doorOpened = false;
 function openDoor() {
   if (doorOpened) return;
   doorOpened = true;
+
   const doorLeft = document.getElementById('doorLeft');
   const doorRight = document.getElementById('doorRight');
   const doorContainer = document.getElementById('doorContainer');
@@ -659,21 +655,24 @@ function openDoor() {
   doorLeft.classList.add('open');
   doorRight.classList.add('open');
 
-  // Play music immediately
+  // تشغيل الصوت عند فتح الباب
   const audio = document.getElementById('audioPlayer');
-  if (audio) { audio.currentTime = 0; audio.play().catch(()=>{}); }
+  if (audio) {
+    audio.currentTime = 0;
+    audio.play().catch(() => {});
+  }
 
   setTimeout(() => { doorScene.classList.add('fade-out'); }, 900);
+
   setTimeout(() => {
     doorScene.style.display = 'none';
     invitation.classList.add('visible');
     startInvFlowers();
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    // Sync visible player
-    const av = document.getElementById('audioPlayerVisible');
-    if (av) { av.currentTime = audio.currentTime; }
   }, 1700);
 }
+  // Play music immediately
+  
 
 // ─── Floating flowers ───
 function startInvFlowers() {
@@ -707,21 +706,6 @@ doorEl.addEventListener('touchstart', () => {
   document.getElementById('doorRight').style.transform = 'rotateY(15deg)';
 }, {passive:true});
 doorEl.addEventListener('touchend', () => { openDoor(); }, {passive:true});
-</script>
-  <script>
-const audio = document.getElementById('audioPlayer');
-audio.load();
-audio.play().catch(err => console.log(err));
-</script>
-<script>
-const audio = document.getElementById('audioPlayer');
-audio.load();
-audio.play().catch(err => console.log(err));
-</script>
-<script>
-const audio = document.getElementById('audioPlayer');
-audio.load();
-audio.play().catch(err => console.log(err));
 </script>
 </body>
 </html>
